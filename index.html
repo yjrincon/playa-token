@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="PLAYA: proyecto de token ERC-20 desplegado en Base Sepolia con fines de prueba y aprendizaje.">
+  <title>PLAYA Token | Base Sepolia</title>
+
+  <style>
+    :root {
+      --black: #080808;
+      --panel: #121212;
+      --gold: #e9b949;
+      --gold-light: #ffe6a0;
+      --white: #f7f4ed;
+      --muted: #aaa69c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 22px 7%;
+      border-bottom: 1px solid #29251b;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mini-logo {
+      width: 42px;
+      height: 42px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .brand {
+      color: var(--gold);
+      font-weight: 800;
+      letter-spacing: 4px;
+      font-size: 21px;
+    }
+
+    .network {
+      margin-left: auto;
+      color: var(--gold-light);
+      font-size: 12px;
+      border: 1px solid #62502a;
+      border-radius: 20px;
+      padding: 5px 10px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 65px 22px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 25px 0 55px;
+    }
+
+    .logo {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 25px;
+      border: 3px solid var(--gold);
+      border-radius: 50%;
+      background: radial-gradient(circle, #201a0c, #050505 72%);
+      box-shadow: 0 0 45px #d6a52a20;
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 92px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    h1 {
+      font-size: clamp(42px, 8vw, 72px);
+      letter-spacing: 10px;
+      margin: 0;
+      color: var(--gold-light);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 18px;
+      margin: 8px 0 25px;
+    }
+
+    .notice {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid #655126;
+      border-radius: 30px;
+      color: var(--gold-light);
+      font-size: 13px;
+    }
+
+    .buttons {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      background: var(--gold);
+      color: #171106;
+    }
+
+    .button.secondary {
+      color: var(--gold-light);
+      border: 1px solid #665329;
+      background: transparent;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid #29251b;
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .card h2 {
+      color: var(--gold);
+      font-size: 15px;
+      margin-top: 0;
+    }
+
+    .value {
+      font-size: 23px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .about {
+      margin-top: 24px;
+    }
+
+    .about h2 {
+      color: var(--gold-light);
+    }
+
+    .warning {
+      border-left: 3px solid var(--gold);
+      background: #17140d;
+      color: #d5c9ad;
+      padding: 16px;
+      border-radius: 4px;
+      font-size: 13px;
+      margin-top: 28px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      border-top: 1px solid #29251b;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--gold-light);
+      outline-offset: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="mini-logo" aria-hidden="true">P</div>
+    <div class="brand">PLAYA</div>
+    <div class="network">BASE SEPOLIA</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="logo" aria-label="Símbolo provisional de PLAYA">P</div>
+
+      <h1>PLAYA</h1>
+      <p class="subtitle">Un proyecto de token en construcción</p>
+      <span class="notice">Red de pruebas · Testnet</span>
+
+      <div class="buttons">
+        <a class="button"
+           href="https://sepolia.basescan.org/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Explorar Base Sepolia
+        </a>
+        <a class="button secondary"
+           href="https://docs.base.org/"
+           target="_blank"
+           rel="noopener noreferrer">
+          Conocer Base
+        </a>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Nombre del token</h2>
+        <div class="value">PLAYA</div>
+        <p class="description">Token estándar ERC-20</p>
+      </article>
+
+      <article class="card">
+        <h2>Suministro inicial</h2>
+        <div class="value">1.000 millones</div>
+        <p class="description">Unidades de PLAYA · 18 decimales</p>
+      </article>
+
+      <article class="card">
+        <h2>Red</h2>
+        <div class="value">Base Sepolia</div>
+        <p class="description">Entorno de pruebas de Base</p>
+      </article>
+    </section>
+
+    <section class="card about">
+      <h2>Acerca de PLAYA</h2>
+      <p>
+        PLAYA es un proyecto experimental creado para aprender sobre
+        contratos inteligentes, tokens ERC-20 y aplicaciones Web3.
+        Esta página presenta el proyecto y documenta su desarrollo.
+      </p>
+      <p class="description">
+        El objetivo actual es educativo: explorar el funcionamiento de
+        un token en una red de pruebas.
+      </p>
+    </section>
+
+    <div class="warning">
+      <strong>Importante:</strong> PLAYA está desplegado en Base Sepolia,
+      una red de pruebas. Los tokens de esta red no representan por sí
+      mismos dinero, propiedad ni derechos financieros, y no se afirma
+      que tengan valor de mercado. Esta página es informativa y no es
+      una oferta de inversión.
+    </div>
+  </main>
+
+  <footer>
+    PLAYA Token · Proyecto experimental · Base Sepolia
+  </footer>
+</body>
+</html>
