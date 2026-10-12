@@ -220,20 +220,29 @@
       <p class="subtitle">Un proyecto de token en construcción</p>
       <span class="notice">Red de pruebas · Testnet</span>
 
-      <div class="buttons">
-        <a class="button"
-           href="https://sepolia.basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281"
-           target="_blank"
-           rel="noopener noreferrer">
-          Explorar Base Sepolia
-        </a>
-        <a class="button secondary"
-           href="https://docs.base.org/"
-           target="_blank"
-           rel="noopener noreferrer">
-          Conocer Base
-        </a>
-      </div>
+      
+<div class="buttons">
+  <a class="button"
+     href="https://sepolia.basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281"
+     target="_blank"
+     rel="noopener noreferrer">
+    Explorar Base Sepolia
+  </a>
+
+  <a class="button secondary"
+     href="https://docs.base.org/"
+     target="_blank"
+     rel="noopener noreferrer">
+    Conocer Base
+  </a>
+
+  <button class="button"
+          type="button"
+          onclick="addPLAYAToMetaMask()">
+    Añadir PLAYA a MetaMask
+  </button>
+</div>
+
     </section>
 
     <section class="grid">
@@ -281,5 +290,49 @@
   <footer>
     PLAYA Token · Proyecto experimental · Base Sepolia
   </footer>
+
+  
+<script>
+  async function addPLAYAToMetaMask() {
+    const contractAddress = "0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281";
+
+    if (!window.ethereum) {
+      alert("Instala MetaMask para añadir PLAYA.");
+      return;
+    }
+
+    try {
+      const chainId = await window.ethereum.request({
+        method: "eth_chainId"
+      });
+
+      if (chainId !== "0x14a34") {
+        alert("Cambia primero a la red Base Sepolia en MetaMask.");
+        return;
+      }
+
+      const added = await window.ethereum.request({
+        method: "wallet_watchAsset",
+        params: {
+          type: "ERC20",
+          options: {
+            address: contractAddress,
+            symbol: "PLAYA",
+            decimals: 18
+          }
+        }
+      });
+
+      if (added) {
+        alert("Solicitud de PLAYA enviada a MetaMask.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("No se pudo añadir PLAYA. Revisa MetaMask e inténtalo de nuevo.");
+    }
+  }
+</script>
+
+  
 </body>
 </html>
