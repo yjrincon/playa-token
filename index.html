@@ -1,345 +1,179 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080808">
-  <meta name="description" content="PLAYA: proyecto de token ERC-20 desplegado en Base Sepolia con fines de prueba y aprendizaje.">
-  <title>PLAYA Token | Base Sepolia</title>
-
+  <meta name="description" content="PLAYA: token ERC-20 en Base inspirado en el turismo, la playa, la brisa, el mar y las vacaciones.">
+  <title>PLAYA Token | Base</title>
   <style>
     :root {
-      --black: #080808;
-      --panel: #121212;
-      --gold: #e9b949;
-      --gold-light: #ffe6a0;
-      --white: #f7f4ed;
-      --muted: #aaa69c;
+      --bg: #080808;
+      --card: #121212;
+      --line: #242424;
+      --text: #f3f1ec;
+      --muted: #9a9a94;
+      --accent: #2fc4d6;
+      --accent-2: #f5b94a;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: var(--black);
-      color: var(--white);
-      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       line-height: 1.6;
     }
-
+    a { color: var(--accent); }
+    header, main, footer { max-width: 880px; margin: 0 auto; padding: 0 20px; }
     header {
-      padding: 22px 7%;
-      border-bottom: 1px solid #29251b;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 24px; padding-bottom: 24px;
     }
-
-    .mini-logo {
-      width: 42px;
-      height: 42px;
-      border: 2px solid var(--gold);
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      font-size: 25px;
-      font-weight: 800;
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .08em; }
+    .badge {
+      font-size: .75rem; letter-spacing: .1em; padding: 4px 10px;
+      border: 1px solid var(--accent); color: var(--accent); border-radius: 999px;
     }
-
-    .brand {
-      color: var(--gold);
-      font-weight: 800;
-      letter-spacing: 4px;
-      font-size: 21px;
+    .hero { text-align: center; padding: 40px 0 32px; }
+    .hero img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; }
+    .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 16px 0 4px; letter-spacing: .06em; }
+    .hero p.tag { color: var(--muted); margin: 0 0 8px; font-size: 1.1rem; }
+    .hero p.net { color: var(--accent-2); margin: 0 0 24px; font-size: .95rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .btn {
+      display: inline-block; padding: 12px 20px; border-radius: 10px;
+      border: 1px solid var(--line); background: var(--card); color: var(--text);
+      text-decoration: none; font: inherit; cursor: pointer;
     }
-
-    .network {
-      margin-left: auto;
-      color: var(--gold-light);
-      font-size: 12px;
-      border: 1px solid #62502a;
-      border-radius: 20px;
-      padding: 5px 10px;
-    }
-
-    main {
-      max-width: 1000px;
-      margin: auto;
-      padding: 65px 22px;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 25px 0 55px;
-    }
-
-    .logo {
-      width: 150px;
-      height: 150px;
-      margin: 0 auto 25px;
-      border: 3px solid var(--gold);
-      border-radius: 50%;
-      background: radial-gradient(circle, #201a0c, #050505 72%);
-      box-shadow: 0 0 45px #d6a52a20;
-      display: grid;
-      place-items: center;
-      color: var(--gold);
-      font-size: 92px;
-      font-weight: 700;
-      line-height: 1;
-      object-fit: contain;
-      border-radius: 50%;
-    }
-
-    h1 {
-      font-size: clamp(42px, 8vw, 72px);
-      letter-spacing: 10px;
-      margin: 0;
-      color: var(--gold-light);
-    }
-
-    .subtitle {
-      color: var(--muted);
-      font-size: 18px;
-      margin: 8px 0 25px;
-    }
-
-    .notice {
-      display: inline-block;
-      padding: 8px 14px;
-      border: 1px solid #655126;
-      border-radius: 30px;
-      color: var(--gold-light);
-      font-size: 13px;
-    }
-
-    .buttons {
-      margin-top: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .button {
-      display: inline-block;
-      text-decoration: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-weight: 700;
-      background: var(--gold);
-      color: #171106;
-    }
-
-    .button.secondary {
-      color: var(--gold-light);
-      border: 1px solid #665329;
-      background: transparent;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-
-    .card {
-      background: var(--panel);
-      border: 1px solid #29251b;
-      border-radius: 14px;
-      padding: 22px;
-    }
-
-    .card h2 {
-      color: var(--gold);
-      font-size: 15px;
-      margin-top: 0;
-    }
-
-    .value {
-      font-size: 23px;
-      font-weight: 700;
-      overflow-wrap: anywhere;
-    }
-
-    .description {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .about {
-      margin-top: 24px;
-    }
-
-    .about h2 {
-      color: var(--gold-light);
-    }
-
-    .warning {
-      border-left: 3px solid var(--gold);
-      background: #17140d;
-      color: #d5c9ad;
-      padding: 16px;
-      border-radius: 4px;
-      font-size: 13px;
-      margin-top: 28px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      border-top: 1px solid #29251b;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    a:focus-visible {
-      outline: 2px solid var(--gold-light);
-      outline-offset: 4px;
-    }
+    .btn.primary { background: var(--accent); color: #04282d; border-color: var(--accent); font-weight: 600; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+    .card h3 { margin: 0 0 6px; font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+    .card .big { font-size: 1.5rem; font-weight: 700; margin: 0; }
+    .card .small { color: var(--muted); margin: 4px 0 0; font-size: .9rem; }
+    section.about { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin: 24px 0; }
+    section.about h2 { margin-top: 0; }
+    .addr { word-break: break-all; font-family: ui-monospace, Consolas, monospace; font-size: .9rem; }
+    .notice { border-left: 3px solid var(--accent-2); padding-left: 14px; color: var(--muted); }
+    footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 32px 20px 48px; }
+    #status { text-align: center; color: var(--muted); min-height: 1.4em; margin-top: 12px; font-size: .9rem; }
   </style>
 </head>
-
 <body>
   <header>
-    <div class="mini-logo" aria-hidden="true">P</div>
     <div class="brand">PLAYA</div>
-    <div class="network">BASE SEPOLIA</div>
+    <span class="badge">BASE</span>
   </header>
 
   <main>
     <section class="hero">
-      <img class="logo" src="playa-logo.png" alt="Logo de PLAYA">
-
+      <img src="playa-logo.png" alt="Logo de PLAYA">
       <h1>PLAYA</h1>
-      <p class="subtitle">Un proyecto de token en construcción</p>
-      <span class="notice">Red de pruebas · Testnet</span>
-
-      
-<div class="buttons">
-  <a class="button"
-     href="https://sepolia.basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281"
-     target="_blank"
-     rel="noopener noreferrer">
-    Explorar Base Sepolia
-  </a>
-
-  <a class="button secondary"
-     href="https://docs.base.org/"
-     target="_blank"
-     rel="noopener noreferrer">
-    Conocer Base
-  </a>
-
-  <button class="button"
-          type="button"
-          onclick="addPLAYAToMetaMask()">
-    Añadir PLAYA a MetaMask
-  </button>
-</div>
-
+      <p class="tag">Un token inspirado en la playa, la brisa, el mar y las vacaciones</p>
+      <p class="net">Token ERC-20 en Base (mainnet)</p>
+      <div class="actions">
+        <a class="btn primary" id="basescan-link" target="_blank" rel="noopener"
+           href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281">Ver en BaseScan</a>
+        <a class="btn" href="https://docs.base.org/" target="_blank" rel="noopener">Conocer Base</a>
+        <button class="btn" id="add-token" type="button">Añadir PLAYA a MetaMask</button>
+      </div>
+      <div id="status" role="status" aria-live="polite"></div>
     </section>
 
- <section class="grid">
-  <article class="card">
-    <h2>Nombre del token</h2>
-    <div class="value">PLAYA</div>
-    <p class="description">Símbolo: PLAYA · Estándar ERC-20</p>
-  </article>
+    <section class="grid">
+      <div class="card">
+        <h3>Nombre del token</h3>
+        <p class="big">PLAYA</p>
+        <p class="small">Símbolo: PLAYA · Estándar ERC-20</p>
+      </div>
+      <div class="card">
+        <h3>Suministro total</h3>
+        <p class="big">1.000 millones</p>
+        <p class="small">1.000.000.000 PLAYA · 18 decimales</p>
+      </div>
+      <div class="card">
+        <h3>Red del contrato</h3>
+        <p class="big">Base</p>
+        <p class="small">Mainnet · Chain ID: 8453</p>
+      </div>
+    </section>
 
-  <article class="card">
-    <h2>Suministro total</h2>
-    <div class="value">1.000 millones</div>
-    <p class="description">1.000.000.000 PLAYA · 18 decimales</p>
-  </article>
-
-  <article class="card">
-    <h2>Red del contrato</h2>
-    <div class="value">Base Sepolia</div>
-    <p class="description">Red de pruebas · Chain ID: 84532</p>
-  </article>
-</section>
-
-<section class="card about">
-  <h2>Acerca de PLAYA</h2>
-  <p>
-    PLAYA es un proyecto experimental creado para aprender sobre
-    contratos inteligentes, tokens ERC-20 y aplicaciones Web3.
-    Esta página presenta el proyecto y documenta su desarrollo.
-  </p>
-  <p class="description">
-    <strong>Estado actual:</strong> token desplegado en Base Sepolia,
-    una red de pruebas. No representa una inversión ni garantiza
-    valor de mercado.
-  </p>
-  <p class="description">
-    <strong>Contrato:</strong>
-    <a href="https://sepolia.basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281"
-       target="_blank"
-       rel="noopener noreferrer">Verificar en BaseScan</a>
-  </p>
-</section>
-
-    <div class="warning">
-      <strong>Importante:</strong> PLAYA está desplegado en Base Sepolia,
-      una red de pruebas. Los tokens de esta red no representan por sí
-      mismos dinero, propiedad ni derechos financieros, y no se afirma
-      que tengan valor de mercado. Esta página es informativa y no es
-      una oferta de inversión.
-    </div>
+    <section class="about">
+      <h2>Acerca de PLAYA</h2>
+      <p>
+        PLAYA es un token comunitario inspirado en el turismo, el mar y las
+        vacaciones. Su contrato es un ERC-20 estándar basado en OpenZeppelin,
+        con suministro fijo: no existe ninguna función adicional para crear
+        más tokens después del despliegue.
+      </p>
+      <p>
+        <strong>Contrato (Base mainnet):</strong><br>
+        <span class="addr">0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281</span><br>
+        <a href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281" target="_blank" rel="noopener">Verificar código en BaseScan</a>
+      </p>
+      <p class="notice">
+        <strong>Importante:</strong> esta página es informativa y no es una oferta
+        de inversión ni una promesa de rentabilidad. PLAYA no garantiza ningún
+        valor de mercado ni utilidad futura. Verifica siempre la dirección del
+        contrato en BaseScan antes de interactuar con cualquier token.
+      </p>
+    </section>
   </main>
 
-  <footer>
-    PLAYA Token · Proyecto experimental · Base Sepolia
-  </footer>
+  <footer>PLAYA Token · Base mainnet · Proyecto comunitario</footer>
 
-  
-<script>
-  async function addPLAYAToMetaMask() {
-    const contractAddress = "0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281";
+  <script>
+    (function () {
+      var TOKEN = {
+        address: "0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281",
+        symbol: "PLAYA",
+        decimals: 18,
+        image: "https://yjrincon.github.io/playa-token/playa-logo.png"
+      };
+      var BASE_CHAIN_ID = "0x2105"; // 8453
+      var statusEl = document.getElementById("status");
+      var btn = document.getElementById("add-token");
 
-    if (!window.ethereum) {
-      alert("Instala MetaMask para añadir PLAYA.");
-      return;
-    }
+      function say(msg) { statusEl.textContent = msg; }
 
-    try {
-      const chainId = await window.ethereum.request({
-        method: "eth_chainId"
-      });
-
-      if (chainId !== "0x14a34") {
-        alert("Cambia primero a la red Base Sepolia en MetaMask.");
-        return;
-      }
-
-      const added = await window.ethereum.request({
-        method: "wallet_watchAsset",
-        params: {
-          type: "ERC20",
-          options: {
-            address: contractAddress,
-            symbol: "PLAYA",
-            decimals: 18
+      btn.addEventListener("click", async function () {
+        if (!window.ethereum) {
+          say("No se detectó una wallet. Instala MetaMask o abre esta página desde su navegador.");
+          return;
+        }
+        try {
+          try {
+            await window.ethereum.request({
+              method: "wallet_switchEthereumChain",
+              params: [{ chainId: BASE_CHAIN_ID }]
+            });
+          } catch (err) {
+            if (err && err.code === 4902) {
+              await window.ethereum.request({
+                method: "wallet_addEthereumChain",
+                params: [{
+                  chainId: BASE_CHAIN_ID,
+                  chainName: "Base",
+                  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+                  rpcUrls: ["https://mainnet.base.org"],
+                  blockExplorerUrls: ["https://basescan.org"]
+                }]
+              });
+            } else {
+              throw err;
+            }
           }
+          var ok = await window.ethereum.request({
+            method: "wallet_watchAsset",
+            params: { type: "ERC20", options: TOKEN }
+          });
+          say(ok ? "PLAYA añadido a tu wallet." : "No se añadió el token.");
+        } catch (e) {
+          say("No se pudo completar la acción: " + (e && e.message ? e.message : "cancelada."));
         }
       });
-
-      if (added) {
-        alert("Solicitud de PLAYA enviada a MetaMask.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("No se pudo añadir PLAYA. Revisa MetaMask e inténtalo de nuevo.");
-    }
-  }
-</script>
-
-  
+    })();
+  </script>
 </body>
 </html>
