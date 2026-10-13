@@ -4,65 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#080808">
-  <meta name="description" content="PLAYA: token ERC-20 en Base inspirado en el turismo, la playa, la brisa, el mar y las vacaciones.">
+  <meta name="description" content="PLAYA: token ERC-20 en Base inspirado en el turismo, la playa, la brisa, el mar y las vacaciones. Suministro fijo de 1.000 millones.">
   <title>PLAYA Token | Base</title>
+  <link rel="icon" type="image/svg+xml" href="playa-logo.svg">
   <style>
     :root {
       --bg: #080808;
       --card: #121212;
       --line: #242424;
       --text: #f3f1ec;
-      --muted: #9a9a94;
+      --muted: #a2a29b;
       --accent: #2fc4d6;
-      --accent-2: #f5b94a;
+      --gold: #f0b93a;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       background: var(--bg);
       color: var(--text);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.6;
+      line-height: 1.65;
     }
     a { color: var(--accent); }
-    header, main, footer { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+    header, main, footer { max-width: 880px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
     header {
       display: flex; align-items: center; justify-content: space-between;
-      padding-top: 24px; padding-bottom: 24px;
+      gap: 12px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 18px;
     }
     .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .08em; }
+    .brand img { width: 32px; height: 32px; }
+    nav { display: flex; gap: 16px; font-size: .92rem; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--text); }
     .badge {
       font-size: .75rem; letter-spacing: .1em; padding: 4px 10px;
       border: 1px solid var(--accent); color: var(--accent); border-radius: 999px;
     }
-    .hero { text-align: center; padding: 40px 0 32px; }
+    .hero { text-align: center; padding: 36px 0 28px; }
     .hero img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; }
     .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 16px 0 4px; letter-spacing: .06em; }
-    .hero p.tag { color: var(--muted); margin: 0 0 8px; font-size: 1.1rem; }
-    .hero p.net { color: var(--accent-2); margin: 0 0 24px; font-size: .95rem; }
+    .hero p.tag { color: var(--muted); margin: 0 auto 8px; max-width: 34rem; font-size: 1.1rem; }
+    .hero p.net { color: var(--gold); margin: 0 0 24px; font-size: .95rem; }
     .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
     .btn {
       display: inline-block; padding: 12px 20px; border-radius: 10px;
       border: 1px solid var(--line); background: var(--card); color: var(--text);
       text-decoration: none; font: inherit; cursor: pointer;
     }
+    .btn:hover { border-color: #3a3a3a; }
     .btn.primary { background: var(--accent); color: #04282d; border-color: var(--accent); font-weight: 600; }
+    #status { text-align: center; color: var(--muted); min-height: 1.4em; margin-top: 12px; font-size: .9rem; }
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
     .card h3 { margin: 0 0 6px; font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
     .card .big { font-size: 1.5rem; font-weight: 700; margin: 0; }
     .card .small { color: var(--muted); margin: 4px 0 0; font-size: .9rem; }
-    section.about { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin: 24px 0; }
-    section.about h2 { margin-top: 0; }
+    section.block { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin: 20px 0; }
+    section.block h2 { margin-top: 0; }
     .addr { word-break: break-all; font-family: ui-monospace, Consolas, monospace; font-size: .9rem; }
-    .notice { border-left: 3px solid var(--accent-2); padding-left: 14px; color: var(--muted); }
-    footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 32px 20px 48px; }
-    #status { text-align: center; color: var(--muted); min-height: 1.4em; margin-top: 12px; font-size: .9rem; }
+    dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; }
+    dt { color: var(--muted); }
+    dd { margin: 0; word-break: break-word; }
+    ol, ul { padding-left: 1.2rem; }
+    .notice { border-left: 3px solid var(--gold); padding-left: 14px; color: var(--muted); }
+    .en { color: var(--muted); font-size: .95rem; }
+    footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 28px 20px 48px; }
+    @media (max-width: 520px) { dl { grid-template-columns: 1fr; gap: 2px; } dt { margin-top: 10px; } }
   </style>
 </head>
 <body>
   <header>
-    <div class="brand">PLAYA</div>
+    <div class="brand"><img src="playa-logo.svg" alt="" width="32" height="32"> PLAYA</div>
+    <nav aria-label="Secciones">
+      <a href="#token">Token</a>
+      <a href="#acerca">Acerca de</a>
+      <a href="#verificar">Verificar</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
     <span class="badge">BASE</span>
   </header>
 
@@ -70,18 +90,18 @@
     <section class="hero">
       <img src="playa-logo.png" alt="Logo de PLAYA">
       <h1>PLAYA</h1>
-      <p class="tag">Un token inspirado en la playa, la brisa, el mar y las vacaciones</p>
+      <p class="tag">Un token comunitario inspirado en la playa, la brisa, el mar y las vacaciones</p>
       <p class="net">Token ERC-20 en Base (mainnet)</p>
       <div class="actions">
-        <a class="btn primary" id="basescan-link" target="_blank" rel="noopener"
-           href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281">Ver en BaseScan</a>
+        <a class="btn primary" target="_blank" rel="noopener"
+           href="https://basescan.org/token/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281">Ver en BaseScan</a>
         <a class="btn" href="https://docs.base.org/" target="_blank" rel="noopener">Conocer Base</a>
         <button class="btn" id="add-token" type="button">Añadir PLAYA a MetaMask</button>
       </div>
       <div id="status" role="status" aria-live="polite"></div>
     </section>
 
-    <section class="grid">
+    <section class="grid" id="token" aria-label="Datos del token">
       <div class="card">
         <h3>Nombre del token</h3>
         <p class="big">PLAYA</p>
@@ -99,29 +119,79 @@
       </div>
     </section>
 
-    <section class="about">
+    <section class="block" id="acerca">
       <h2>Acerca de PLAYA</h2>
       <p>
         PLAYA es un token comunitario inspirado en el turismo, el mar y las
-        vacaciones. Su contrato es un ERC-20 estándar basado en OpenZeppelin,
-        con suministro fijo: no existe ninguna función adicional para crear
-        más tokens después del despliegue.
+        vacaciones. Es un contrato ERC-20 estándar, basado en OpenZeppelin, con
+        suministro fijo: no existe ninguna función para crear más tokens
+        después del despliegue.
       </p>
       <p>
-        <strong>Contrato (Base mainnet):</strong><br>
-        <span class="addr">0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281</span><br>
-        <a href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281" target="_blank" rel="noopener">Verificar código en BaseScan</a>
+        Es un proyecto experimental. Por ahora PLAYA no ofrece una utilidad
+        concreta ni una promesa de uso futuro: su propósito es explorar cómo un
+        token comunitario puede representar una identidad compartida alrededor
+        del mar y los viajes.
       </p>
+      <p class="en">
+        PLAYA is a community ERC-20 token on Base inspired by tourism, the sea and
+        beach vacations. It has a fixed supply of 1,000,000,000 tokens and no mint
+        function. It is an experimental project and does not promise returns or utility.
+      </p>
+    </section>
+
+    <section class="block" id="verificar">
+      <h2>Datos verificables</h2>
+      <dl>
+        <dt>Contrato</dt>
+        <dd><span class="addr">0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281</span><br>
+          <a href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281#code" target="_blank" rel="noopener">Ver el código verificado en BaseScan</a></dd>
+        <dt>Red</dt>
+        <dd>Base mainnet (Chain ID 8453)</dd>
+        <dt>Suministro</dt>
+        <dd>1.000.000.000 PLAYA, creados al desplegar el contrato en la wallet del creador</dd>
+        <dt>Liquidez</dt>
+        <dd>Una parte se aportó a un pool de Uniswap v2 en Base (comisión 0,3 %).
+          <a href="https://basescan.org/address/0x2C71490359c1dBffb41cb17B51Ad912d490F83B0" target="_blank" rel="noopener">Ver el pool en BaseScan</a></dd>
+        <dt>Licencia</dt>
+        <dd>MIT</dd>
+      </dl>
+      <p class="notice" style="margin-top:18px">
+        La liquidez del pool es muy pequeña y no está bloqueada, por lo que el
+        precio puede variar mucho con cualquier operación. Verifica siempre la
+        dirección del contrato antes de interactuar con cualquier token.
+      </p>
+    </section>
+
+    <section class="block" id="equipo">
+      <h2>Equipo</h2>
+      <!-- REEMPLAZAR antes de publicar: nombre y enlace a un perfil profesional (LinkedIn o equivalente). -->
+      <p>
+        <strong>YEISON JOSE RINCON BERRIO</strong> · Creador y responsable del proyecto ·
+        <a href="www.linkedin.com/in/yjrincon" target="_blank" rel="noopener">Perfil profesional</a>
+      </p>
+    </section>
+
+    <section class="block" id="contacto">
+      <h2>Contacto</h2>
+      <p>Correo oficial del proyecto: <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a></p>
+      <p>
+        Este es el único canal oficial. Si alguien te escribe en nombre de PLAYA
+        pidiéndote dinero, tu frase semilla o tu clave privada, es una estafa.
+      </p>
+    </section>
+
+    <section class="block">
+      <h2>Aviso importante</h2>
       <p class="notice">
-        <strong>Importante:</strong> esta página es informativa y no es una oferta
-        de inversión ni una promesa de rentabilidad. PLAYA no garantiza ningún
-        valor de mercado ni utilidad futura. Verifica siempre la dirección del
-        contrato en BaseScan antes de interactuar con cualquier token.
+        Esta página es informativa y no es una oferta de inversión ni una promesa
+        de rentabilidad. PLAYA no garantiza ningún valor de mercado ni utilidad
+        futura, y puedes perder el dinero que destines a ella.
       </p>
     </section>
   </main>
 
-  <footer>PLAYA Token · Base mainnet · Proyecto comunitario | Correo: contacto@playatoken.com</footer>
+  <footer>PLAYA Token · Base mainnet · Proyecto comunitario · <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a></footer>
 
   <script>
     (function () {
