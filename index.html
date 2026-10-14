@@ -3,95 +3,167 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080808">
+  <meta name="theme-color" content="#050a10">
   <meta name="description" content="PLAYA: token ERC-20 en Base inspirado en el turismo, la playa, la brisa, el mar y las vacaciones. Suministro fijo de 1.000 millones.">
   <title>PLAYA Token | Base</title>
   <link rel="icon" type="image/svg+xml" href="playa-logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Unbounded:wght@500;700;800&display=swap">
   <style>
     :root {
-      --bg: #080808;
-      --card: #121212;
-      --line: #242424;
-      --text: #f3f1ec;
-      --muted: #a2a29b;
-      --accent: #2fc4d6;
+      --abyss: #050a10;
+      --deep: #0b1620;
+      --raise: #12263a;
+      --raise-hi: #1a3550;
+      --line: rgba(147, 168, 176, .22);
       --gold: #f0b93a;
+      --gold-soft: rgba(240, 185, 58, .38);
+      --foam: #7fe7e0;
+      --text: #eaf1f2;
+      --muted: #93a8b0;
+      --display: "Unbounded", "Segoe UI", system-ui, sans-serif;
+      --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --sea: clamp(230px, 38vh, 380px);
+      --coin: clamp(150px, 30vw, 340px);
+      --chamfer: 12px;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      background: var(--bg);
+      background: var(--abyss);
       color: var(--text);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      line-height: 1.65;
+      font: 400 1.0625rem/1.65 var(--body);
+      -webkit-font-smoothing: antialiased;
     }
-    a { color: var(--accent); }
-    header, main, footer { max-width: 880px; margin: 0 auto; padding-left: 20px; padding-right: 20px; }
-    header {
+    a { color: var(--foam); text-underline-offset: 3px; }
+    a:hover { color: var(--gold); }
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 48px); }
+
+    /* ---------- Cabecera ---------- */
+    .top { position: absolute; top: 0; left: 0; right: 0; z-index: 4; }
+    .top .wrap {
       display: flex; align-items: center; justify-content: space-between;
-      gap: 12px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 18px;
+      flex-wrap: wrap; gap: 10px 28px; padding-top: 22px; padding-bottom: 10px;
     }
-    .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .08em; }
-    .brand img { width: 32px; height: 32px; }
-    nav { display: flex; gap: 16px; font-size: .92rem; flex-wrap: wrap; }
-    nav a { color: var(--muted); text-decoration: none; }
-    nav a:hover { color: var(--text); }
-    .badge {
-      font-size: .75rem; letter-spacing: .1em; padding: 4px 10px;
-      border: 1px solid var(--accent); color: var(--accent); border-radius: 999px;
+    .brand { display: flex; align-items: center; gap: 12px; font: 700 1rem var(--display); letter-spacing: .04em; color: var(--text); text-decoration: none; }
+    .brand img { width: 34px; height: 34px; display: block; }
+    .top nav { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: .95rem; }
+    .top nav a { color: var(--muted); text-decoration: none; padding: 4px 0; }
+    .top nav a:hover { color: var(--text); }
+    .net-badge { font-size: .85rem; color: var(--gold); border: 1px solid var(--gold-soft); padding: 3px 12px; border-radius: 2px; }
+
+    /* ---------- Portada ---------- */
+    .hero {
+      position: relative; overflow: hidden;
+      min-height: max(640px, 100svh);
+      padding-bottom: var(--sea);
+      display: flex; align-items: flex-end;
     }
-    .hero { text-align: center; padding: 36px 0 28px; }
-    .hero img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; }
-    .hero h1 { font-size: clamp(2.5rem, 8vw, 4rem); margin: 16px 0 4px; letter-spacing: .06em; }
-    .hero p.tag { color: var(--muted); margin: 0 auto 8px; max-width: 34rem; font-size: 1.1rem; }
-    .hero p.net { color: var(--gold); margin: 0 0 24px; font-size: .95rem; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+    .hero-copy { position: relative; z-index: 3; padding-top: 130px; padding-bottom: clamp(28px, 6vh, 64px); }
+    .hero h1 {
+      font: 800 clamp(3.4rem, 13vw, 9rem)/.92 var(--display);
+      letter-spacing: -.03em; margin: 0 0 22px; color: var(--text);
+    }
+    .hero .tag { font-size: clamp(1.05rem, 2.2vw, 1.3rem); color: var(--text); max-width: 29rem; margin: 0 0 8px; }
+    .hero .chain { color: var(--gold); margin: 0 0 26px; font-weight: 500; }
+    .coin {
+      position: absolute; z-index: 1;
+      width: var(--coin); height: var(--coin);
+      right: clamp(14px, 8vw, 130px);
+      bottom: calc(var(--sea) * .94 - var(--coin) * .42);
+      filter: drop-shadow(0 0 54px rgba(240, 185, 58, .22));
+    }
+    .sea { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; width: 100%; height: var(--sea); display: block; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
     .btn {
-      display: inline-block; padding: 12px 20px; border-radius: 10px;
-      border: 1px solid var(--line); background: var(--card); color: var(--text);
-      text-decoration: none; font: inherit; cursor: pointer;
+      display: inline-block; font: 600 .98rem var(--body); color: var(--text);
+      background: var(--raise); border: 0; padding: 13px 22px; cursor: pointer; text-decoration: none;
+      clip-path: polygon(0 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% 100%, var(--chamfer) 100%, 0 calc(100% - var(--chamfer)));
+      transition: background .18s ease, color .18s ease;
     }
-    .btn:hover { border-color: #3a3a3a; }
-    .btn.primary { background: var(--accent); color: #04282d; border-color: var(--accent); font-weight: 600; }
-    #status { text-align: center; color: var(--muted); min-height: 1.4em; margin-top: 12px; font-size: .9rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 24px 0; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
-    .card h3 { margin: 0 0 6px; font-size: .8rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
-    .card .big { font-size: 1.5rem; font-weight: 700; margin: 0; }
-    .card .small { color: var(--muted); margin: 4px 0 0; font-size: .9rem; }
-    section.block { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin: 20px 0; }
-    section.block h2 { margin-top: 0; }
-    .addr { word-break: break-all; font-family: ui-monospace, Consolas, monospace; font-size: .9rem; }
-    dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; }
-    dt { color: var(--muted); }
-    dd { margin: 0; word-break: break-word; }
-    ol, ul { padding-left: 1.2rem; }
-    .notice { border-left: 3px solid var(--gold); padding-left: 14px; color: var(--muted); }
-    .en { color: var(--muted); font-size: .95rem; }
-    footer { color: var(--muted); font-size: .85rem; text-align: center; padding: 28px 20px 48px; }
-    @media (max-width: 520px) { dl { grid-template-columns: 1fr; gap: 2px; } dt { margin-top: 10px; } }
+    .btn:hover { background: var(--raise-hi); color: var(--text); }
+    .btn.primary { background: var(--gold); color: #1d1402; }
+    .btn.primary:hover { background: #ffcd5c; color: #1d1402; }
+    #status { color: var(--muted); font-size: .92rem; max-width: 34rem; min-height: 1.4em; margin-top: 14px; word-break: break-word; }
+    #status p { margin: 4px 0; }
+
+    /* ---------- Datos clave ---------- */
+    .spec { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .spec li { padding: 34px 28px 34px 0; display: flex; flex-direction: column; gap: 6px; }
+    .spec li + li { padding-left: 28px; border-left: 1px solid var(--line); }
+    .spec .v { font: 700 clamp(1.25rem, 2.6vw, 1.9rem)/1.15 var(--display); letter-spacing: -.01em; }
+    .spec .k { color: var(--gold); font-weight: 500; }
+    .spec .d { color: var(--muted); font-size: .95rem; }
+
+    /* ---------- Secciones ---------- */
+    .sec {
+      position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      gap: 1.2rem clamp(24px, 6vw, 88px); padding: clamp(48px, 8vw, 88px) 0; border-top: 1px solid var(--line);
+    }
+    .sec::before { content: ""; position: absolute; top: -1px; left: 0; width: 56px; height: 1px; background: var(--gold); }
+    .sec h2 { font: 700 clamp(1.15rem, 2.4vw, 1.55rem)/1.25 var(--display); margin: 0; letter-spacing: -.01em; }
+    .sec-body { max-width: 62ch; }
+    .sec-body > :first-child { margin-top: 0; }
+    .sec-body p { margin: 0 0 1.1em; }
+    .en { color: var(--muted); font-size: .98rem; }
+    .facts { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); }
+    .facts dt, .facts dd { padding: 14px 0; border-bottom: 1px solid var(--line); margin: 0; }
+    .facts dt { color: var(--muted); padding-right: 28px; }
+    .facts dd { word-break: break-word; }
+    .facts dt:first-of-type, .facts dt:first-of-type + dd { border-top: 1px solid var(--line); }
+    .addr { font: .92rem/1.5 ui-monospace, "SFMono-Regular", Consolas, monospace; word-break: break-all; color: var(--text); }
+    .copy {
+      font: 500 .85rem var(--body); color: var(--gold); background: transparent;
+      border: 1px solid var(--gold-soft); border-radius: 2px; padding: 3px 10px; margin-left: 8px; cursor: pointer;
+    }
+    .copy:hover { background: rgba(240, 185, 58, .12); }
+    .notice { border: 1px solid var(--gold-soft); border-radius: 2px; padding: 14px 18px; color: var(--text); margin: 22px 0 0; }
+    .sec-body .notice { margin-bottom: 0; }
+
+    footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; padding: 28px 0 56px; }
+    footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+    @media (max-width: 760px) {
+      .spec { grid-template-columns: 1fr; }
+      .spec li, .spec li + li { padding: 22px 0; border-left: 0; }
+      .spec li + li { border-top: 1px solid var(--line); }
+      .sec { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr; }
+      .facts dt { padding: 14px 0 0; border-bottom: 0; }
+      .facts dd { padding-top: 2px; }
+      .facts dt:first-of-type + dd { border-top: 0; }
+      .facts dt:first-of-type { border-top: 1px solid var(--line); }
+      .hero-copy { padding-top: 150px; }
+      :root { --coin: clamp(120px, 34vw, 200px); }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
   </style>
 </head>
 <body>
-  <header>
-    <div class="brand"><img src="playa-logo.svg" alt="" width="32" height="32"> PLAYA</div>
-    <nav aria-label="Secciones">
-      <a href="#token">Token</a>
-      <a href="#acerca">Acerca de</a>
-      <a href="#verificar">Verificar</a>
-      <a href="#equipo">Equipo</a>
-      <a href="#contacto">Contacto</a>
-    </nav>
-    <span class="badge">BASE</span>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="#inicio"><img src="playa-logo.svg" alt="" width="34" height="34">PLAYA</a>
+      <nav aria-label="Secciones">
+        <a href="#token">Token</a>
+        <a href="#acerca">Acerca de</a>
+        <a href="#verificar">Verificar</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <span class="net-badge">Base</span>
+    </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <img src="playa-logo.png" alt="Logo de PLAYA">
+  <section class="hero" id="inicio">
+    <img class="coin" src="playa-logo.svg" alt="Logo de PLAYA: una moneda dorada con una letra P y una ola" width="340" height="340">
+    <div class="wrap hero-copy">
       <h1>PLAYA</h1>
       <p class="tag">Un token comunitario inspirado en la playa, la brisa, el mar y las vacaciones</p>
-      <p class="net">Token ERC-20 en Base (mainnet)</p>
+      <p class="chain">Token ERC-20 en Base (mainnet)</p>
       <div class="actions">
         <a class="btn primary" target="_blank" rel="noopener"
            href="https://basescan.org/token/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281">Ver en BaseScan</a>
@@ -99,101 +171,202 @@
         <button class="btn" id="add-token" type="button">Añadir PLAYA a MetaMask</button>
       </div>
       <div id="status" role="status" aria-live="polite"></div>
-    </section>
+    </div>
+    <canvas class="sea" id="sea" aria-hidden="true"></canvas>
+  </section>
 
-    <section class="grid" id="token" aria-label="Datos del token">
-      <div class="card">
-        <h3>Nombre del token</h3>
-        <p class="big">PLAYA</p>
-        <p class="small">Símbolo: PLAYA · Estándar ERC-20</p>
-      </div>
-      <div class="card">
-        <h3>Suministro total</h3>
-        <p class="big">1.000 millones</p>
-        <p class="small">1.000.000.000 PLAYA · 18 decimales</p>
-      </div>
-      <div class="card">
-        <h3>Red del contrato</h3>
-        <p class="big">Base</p>
-        <p class="small">Mainnet · Chain ID: 8453</p>
-      </div>
-    </section>
+  <main>
+    <div class="wrap">
+      <ul class="spec" id="token" aria-label="Datos del token">
+        <li><span class="v">PLAYA</span><span class="k">Nombre del token</span><span class="d">Símbolo PLAYA, estándar ERC-20</span></li>
+        <li><span class="v">1.000 millones</span><span class="k">Suministro total</span><span class="d">1.000.000.000 PLAYA, 18 decimales</span></li>
+        <li><span class="v">Base</span><span class="k">Red del contrato</span><span class="d">Mainnet, Chain ID 8453</span></li>
+      </ul>
 
-    <section class="block" id="acerca">
-      <h2>Acerca de PLAYA</h2>
-      <p>
-        PLAYA es un token comunitario inspirado en el turismo, el mar y las
-        vacaciones. Es un contrato ERC-20 estándar, basado en OpenZeppelin, con
-        suministro fijo: no existe ninguna función para crear más tokens
-        después del despliegue.
-      </p>
-      <p>
-        Es un proyecto experimental. Por ahora PLAYA no ofrece una utilidad
-        concreta ni una promesa de uso futuro: su propósito es explorar cómo un
-        token comunitario puede representar una identidad compartida alrededor
-        del mar y los viajes.
-      </p>
-      <p class="en">
-        PLAYA is a community ERC-20 token on Base inspired by tourism, the sea and
-        beach vacations. It has a fixed supply of 1,000,000,000 tokens and no mint
-        function. It is an experimental project and does not promise returns or utility.
-      </p>
-    </section>
+      <section class="sec" id="acerca" aria-labelledby="h-acerca">
+        <h2 id="h-acerca">Acerca de PLAYA</h2>
+        <div class="sec-body">
+          <p>
+            PLAYA es un token comunitario inspirado en el turismo, el mar y las
+            vacaciones. Es un contrato ERC-20 estándar, basado en OpenZeppelin, con
+            suministro fijo: no existe ninguna función para crear más tokens
+            después del despliegue.
+          </p>
+          <p>
+            Es un proyecto experimental. Por ahora PLAYA no ofrece una utilidad
+            concreta ni una promesa de uso futuro: su propósito es explorar cómo un
+            token comunitario puede representar una identidad compartida alrededor
+            del mar y los viajes.
+          </p>
+          <p class="en">
+            PLAYA is a community ERC-20 token on Base inspired by tourism, the sea and
+            beach vacations. It has a fixed supply of 1,000,000,000 tokens and no mint
+            function. It is an experimental project and does not promise returns or utility.
+          </p>
+        </div>
+      </section>
 
-    <section class="block" id="verificar">
-      <h2>Datos verificables</h2>
-      <dl>
-        <dt>Contrato</dt>
-        <dd><span class="addr">0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281</span><br>
-          <a href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281#code" target="_blank" rel="noopener">Ver el código verificado en BaseScan</a></dd>
-        <dt>Red</dt>
-        <dd>Base mainnet (Chain ID 8453)</dd>
-        <dt>Suministro</dt>
-        <dd>1.000.000.000 PLAYA, creados al desplegar el contrato en la wallet del creador</dd>
-        <dt>Liquidez</dt>
-        <dd>Una parte se aportó a un pool de Uniswap v2 en Base (comisión 0,3 %).
-          <a href="https://basescan.org/address/0x2C71490359c1dBffb41cb17B51Ad912d490F83B0" target="_blank" rel="noopener">Ver el pool en BaseScan</a></dd>
-        <dt>Licencia</dt>
-        <dd>MIT</dd>
-      </dl>
-      <p class="notice" style="margin-top:18px">
-        La liquidez del pool es muy pequeña y no está bloqueada, por lo que el
-        precio puede variar mucho con cualquier operación. Verifica siempre la
-        dirección del contrato antes de interactuar con cualquier token.
-      </p>
-    </section>
+      <section class="sec" id="verificar" aria-labelledby="h-verificar">
+        <h2 id="h-verificar">Datos verificables</h2>
+        <div class="sec-body">
+          <dl class="facts">
+            <dt>Contrato</dt>
+            <dd>
+              <span class="addr" id="addr">0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281</span>
+              <button class="copy" id="copy-addr" type="button">Copiar</button><br>
+              <a href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281#code" target="_blank" rel="noopener">Ver el código verificado en BaseScan</a>
+            </dd>
+            <dt>Red</dt>
+            <dd>Base mainnet (Chain ID 8453)</dd>
+            <dt>Suministro</dt>
+            <dd>1.000.000.000 PLAYA, creados al desplegar el contrato en la wallet del creador</dd>
+            <dt>Liquidez</dt>
+            <dd>Una parte se aportó a un pool de Uniswap v2 en Base (comisión 0,3 %).
+              <a href="https://basescan.org/address/0x2C71490359c1dBffb41cb17B51Ad912d490F83B0" target="_blank" rel="noopener">Ver el pool en BaseScan</a></dd>
+            <dt>Licencia</dt>
+            <dd>MIT</dd>
+          </dl>
+          <p class="notice">
+            La liquidez del pool es muy pequeña y no está bloqueada, por lo que el
+            precio puede variar mucho con cualquier operación. Verifica siempre la
+            dirección del contrato antes de interactuar con cualquier token.
+          </p>
+        </div>
+      </section>
 
-    <section class="block" id="equipo">
-      <h2>Equipo</h2>
-      <!-- REEMPLAZAR antes de publicar: nombre y enlace a un perfil profesional (LinkedIn o equivalente). -->
-      <p>
-        <strong>YEISON JOSE RINCON BERRIO</strong> · Creador y responsable del proyecto ·
-        <a href="https://www.linkedin.com/in/yjrincon" target="_blank" rel="noopener">Perfil profesional</a>
-      </p>
-    </section>
+      <section class="sec" id="equipo" aria-labelledby="h-equipo">
+        <h2 id="h-equipo">Equipo</h2>
+        <div class="sec-body">
+          <!-- REEMPLAZAR antes de publicar: nombre y enlace a un perfil profesional (LinkedIn o equivalente). -->
+          <p>
+            <strong>REEMPLAZAR: tu nombre completo</strong>, creador y responsable del proyecto.
+            <a href="REEMPLAZAR-URL-DE-TU-PERFIL-PROFESIONAL" target="_blank" rel="noopener">Perfil profesional</a>
+          </p>
+        </div>
+      </section>
 
-    <section class="block" id="contacto">
-      <h2>Contacto</h2>
-      <p>Correo oficial del proyecto: <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a></p>
-      <p>
-        Este es el único canal oficial. Si alguien te escribe en nombre de PLAYA
-        pidiéndote dinero, tu frase semilla o tu clave privada, es una estafa.
-      </p>
-    </section>
+      <section class="sec" id="contacto" aria-labelledby="h-contacto">
+        <h2 id="h-contacto">Contacto</h2>
+        <div class="sec-body">
+          <p>Correo oficial del proyecto: <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a></p>
+          <p>
+            Este es el único canal oficial. Si alguien te escribe en nombre de PLAYA
+            pidiéndote dinero, tu frase semilla o tu clave privada, es una estafa.
+          </p>
+        </div>
+      </section>
 
-    <section class="block">
-      <h2>Aviso importante</h2>
-      <p class="notice">
-        Esta página es informativa y no es una oferta de inversión ni una promesa
-        de rentabilidad. PLAYA no garantiza ningún valor de mercado ni utilidad
-        futura, y puedes perder el dinero que destines a ella.
-      </p>
-    </section>
+      <section class="sec" aria-labelledby="h-aviso">
+        <h2 id="h-aviso">Aviso importante</h2>
+        <div class="sec-body">
+          <p class="notice">
+            Esta página es informativa y no es una oferta de inversión ni una promesa
+            de rentabilidad. PLAYA no garantiza ningún valor de mercado ni utilidad
+            futura, y puedes perder el dinero que destines a ella.
+          </p>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <footer>PLAYA Token · Base mainnet · Proyecto comunitario · <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a></footer>
+  <footer>
+    <div class="wrap">
+      <span>PLAYA Token, Base mainnet. Proyecto comunitario.</span>
+      <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a>
+    </div>
+  </footer>
 
   <script>
+    /* ---------- Olas de la portada ---------- */
+    (function () {
+      var cv = document.getElementById("sea");
+      if (!cv || !cv.getContext) return;
+      var ctx = cv.getContext("2d");
+      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var W = 0, H = 0, t = 0, last = 0, raf = 0, onScreen = true, px = 0, pxTarget = 0;
+      var BG = "#050a10";
+      var FOAM = [127, 231, 224], GOLD = [240, 185, 58];
+
+      function mix(k) {
+        var a = 0.2 + 0.75 * k;
+        return "rgba(" + Math.round(FOAM[0] + (GOLD[0] - FOAM[0]) * k) + "," +
+          Math.round(FOAM[1] + (GOLD[1] - FOAM[1]) * k) + "," +
+          Math.round(FOAM[2] + (GOLD[2] - FOAM[2]) * k) + "," + a.toFixed(2) + ")";
+      }
+
+      function resize() {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var r = cv.getBoundingClientRect();
+        W = r.width; H = r.height;
+        cv.width = Math.max(1, Math.round(W * dpr));
+        cv.height = Math.max(1, Math.round(H * dpr));
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        draw();
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        var N = W < 600 ? 20 : 32;
+        var step = W < 600 ? 10 : 8;
+        for (var i = 0; i < N; i++) {
+          var k = i / (N - 1);                       // 0 = lejos, 1 = cerca
+          var y0 = H * (0.06 + 0.9 * Math.pow(k, 1.55));
+          var amp = 3 + 24 * k;
+          var ph = i * 0.62 + px * 1.6;
+          ctx.beginPath();
+          for (var x = 0; x <= W + step; x += step) {
+            var u = x / W;
+            var y = y0 +
+              Math.sin(u * 7.2 + t * 0.9 + ph) * amp * 0.55 +
+              Math.sin(u * 15.5 - t * 0.6 + ph * 1.7) * amp * 0.28 +
+              Math.sin(u * 3.1 + t * 0.35 + ph * 0.5) * amp * 0.45;
+            if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+          }
+          ctx.strokeStyle = mix(k);
+          ctx.lineWidth = 0.9 + 1.1 * k;
+          ctx.stroke();
+          ctx.lineTo(W + step, H + 2); ctx.lineTo(0, H + 2); ctx.closePath();
+          ctx.fillStyle = BG;
+          ctx.fill();
+          // repasa el trazo sobre el relleno para que la línea quede nítida
+          ctx.beginPath();
+          for (var x2 = 0; x2 <= W + step; x2 += step) {
+            var u2 = x2 / W;
+            var y2 = y0 +
+              Math.sin(u2 * 7.2 + t * 0.9 + ph) * amp * 0.55 +
+              Math.sin(u2 * 15.5 - t * 0.6 + ph * 1.7) * amp * 0.28 +
+              Math.sin(u2 * 3.1 + t * 0.35 + ph * 0.5) * amp * 0.45;
+            if (x2 === 0) ctx.moveTo(x2, y2); else ctx.lineTo(x2, y2);
+          }
+          ctx.stroke();
+        }
+      }
+
+      function frame(now) {
+        raf = 0;
+        if (!onScreen || document.hidden) return;
+        var dt = last ? Math.min((now - last) / 1000, 0.05) : 0.016;
+        last = now;
+        t += dt * 0.7;
+        px += (pxTarget - px) * 0.04;
+        draw();
+        raf = requestAnimationFrame(frame);
+      }
+      function start() { if (!reduce && !raf && onScreen && !document.hidden) { last = 0; raf = requestAnimationFrame(frame); } }
+
+      window.addEventListener("resize", resize);
+      if (!reduce) {
+        window.addEventListener("pointermove", function (e) { pxTarget = e.clientX / window.innerWidth - 0.5; }, { passive: true });
+        document.addEventListener("visibilitychange", start);
+        if ("IntersectionObserver" in window) {
+          new IntersectionObserver(function (en) { onScreen = en[0].isIntersecting; start(); }).observe(cv);
+        }
+      }
+      resize();
+      start();
+    })();
+
+    /* ---------- Copiar dirección y añadir token ---------- */
     (function () {
       var TOKEN = {
         address: "0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281",
@@ -204,12 +377,44 @@
       var BASE_CHAIN_ID = "0x2105"; // 8453
       var statusEl = document.getElementById("status");
       var btn = document.getElementById("add-token");
+      var copyBtn = document.getElementById("copy-addr");
 
       function say(msg) { statusEl.textContent = msg; }
 
+      if (copyBtn) {
+        copyBtn.addEventListener("click", function () {
+          function done(ok) {
+            copyBtn.textContent = ok ? "Copiado" : "No se pudo copiar";
+            setTimeout(function () { copyBtn.textContent = "Copiar"; }, 2000);
+          }
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(TOKEN.address).then(function () { done(true); }, function () { done(false); });
+          } else { done(false); }
+        });
+      }
+
+      function noWallet() {
+        // Sin wallet inyectada (p. ej. Chrome en el móvil): ofrecer abrir en la app o importar a mano.
+        var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        statusEl.textContent = "";
+        var p1 = document.createElement("p");
+        p1.textContent = "No se detectó una wallet en este navegador.";
+        statusEl.appendChild(p1);
+        if (isMobile) {
+          var a = document.createElement("a");
+          a.href = "https://metamask.app.link/dapp/" + location.host + location.pathname;
+          a.textContent = "Abrir esta página en la app de MetaMask";
+          statusEl.appendChild(a);
+        }
+        var p2 = document.createElement("p");
+        p2.textContent = "También puedes añadirlo a mano: en MetaMask elige la red Base, ve a Tokens, " +
+          "Importar tokens y pega la dirección del contrato: " + TOKEN.address;
+        statusEl.appendChild(p2);
+      }
+
       btn.addEventListener("click", async function () {
         if (!window.ethereum) {
-          say("No se detectó una wallet. Instala MetaMask o abre esta página desde su navegador.");
+          noWallet();
           return;
         }
         try {
@@ -238,7 +443,7 @@
             method: "wallet_watchAsset",
             params: { type: "ERC20", options: TOKEN }
           });
-          say(ok ? "PLAYA añadido a tu wallet." : "No se añadió el token.");
+          say(ok ? "Listo: PLAYA está en tu wallet (red Base). Si no pediste confirmación, es posible que ya lo tuvieras añadido." : "No se añadió el token.");
         } catch (e) {
           say("No se pudo completar la acción: " + (e && e.message ? e.message : "cancelada."));
         }
