@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#050a10">
-  <meta name="description" content="PLAYA: token ERC-20 en Base inspirado en el turismo, la playa, la brisa, el mar y las vacaciones. Suministro fijo de 1.000 millones.">
+  <meta name="description" content="PLAYA: an ERC-20 token on Base inspired by tourism, the beach, the sea breeze and vacations. Fixed supply of 1 billion.">
   <title>PLAYA Token | Base</title>
   <link rel="icon" type="image/svg+xml" href="playa-logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,7 +25,7 @@
       --display: "Unbounded", "Segoe UI", system-ui, sans-serif;
       --body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       --sea: clamp(230px, 38vh, 380px);
-      --coin: clamp(150px, 30vw, 340px);
+      --coin: clamp(150px, 26vw, 320px);
       --chamfer: 12px;
     }
     * { box-sizing: border-box; }
@@ -53,7 +53,12 @@
     .top nav { display: flex; flex-wrap: wrap; gap: 6px 22px; font-size: .95rem; }
     .top nav a { color: var(--muted); text-decoration: none; padding: 4px 0; }
     .top nav a:hover { color: var(--text); }
+    .right { display: flex; align-items: center; gap: 12px; }
     .net-badge { font-size: .85rem; color: var(--gold); border: 1px solid var(--gold-soft); padding: 3px 12px; border-radius: 2px; }
+    .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 2px; overflow: hidden; }
+    .lang button { font: 600 .82rem var(--body); letter-spacing: .06em; color: var(--muted); background: transparent; border: 0; padding: 5px 11px; cursor: pointer; }
+    .lang button[aria-pressed="true"] { background: var(--gold); color: #1d1402; }
+    .lang button:not([aria-pressed="true"]):hover { color: var(--text); }
 
     /* ---------- Portada ---------- */
     .hero {
@@ -73,7 +78,7 @@
       position: absolute; z-index: 1;
       width: var(--coin); height: var(--coin);
       right: clamp(14px, 8vw, 130px);
-      bottom: calc(var(--sea) * .94 - var(--coin) * .42);
+      bottom: calc(var(--sea) * .94 - var(--coin) * .6);
       filter: drop-shadow(0 0 54px rgba(240, 185, 58, .22));
     }
     .sea { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; width: 100%; height: var(--sea); display: block; }
@@ -109,7 +114,17 @@
     .sec-body { max-width: 62ch; }
     .sec-body > :first-child { margin-top: 0; }
     .sec-body p { margin: 0 0 1.1em; }
-    .en { color: var(--muted); font-size: .98rem; }
+    .list { margin: 0 0 1.1em; padding-left: 1.2em; }
+    .list li { margin: 0 0 .5em; }
+    .roadmap { list-style: none; margin: 0 0 1.1em; padding: 0; }
+    .roadmap li { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); gap: 4px 18px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+    .roadmap li:first-child { border-top: 1px solid var(--line); }
+    .roadmap .st { color: var(--gold); font-weight: 600; font-size: .9rem; letter-spacing: .02em; }
+    .muted { color: var(--muted); font-size: .95rem; }
+    details { border-bottom: 1px solid var(--line); padding: 14px 0; }
+    details:first-of-type { border-top: 1px solid var(--line); }
+    summary { cursor: pointer; font-weight: 600; }
+    details p { margin: 10px 0 0; color: var(--muted); }
     .facts { margin: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); }
     .facts dt, .facts dd { padding: 14px 0; border-bottom: 1px solid var(--line); margin: 0; }
     .facts dt { color: var(--muted); padding-right: 28px; }
@@ -137,7 +152,12 @@
       .facts dd { padding-top: 2px; }
       .facts dt:first-of-type + dd { border-top: 0; }
       .facts dt:first-of-type { border-top: 1px solid var(--line); }
-      .hero-copy { padding-top: 150px; }
+      .hero-copy { padding-top: 170px; }
+      .net-badge { display: none; }
+      .top .wrap { row-gap: 6px; }
+      .right { order: 2; }
+      .top nav { order: 3; width: 100%; }
+      .roadmap li { grid-template-columns: 1fr; }
       :root { --coin: clamp(120px, 34vw, 200px); }
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn { transition: none; } }
@@ -146,29 +166,38 @@
 <body>
   <header class="top">
     <div class="wrap">
-      <a class="brand" href="#inicio"><img src="playa-logo.svg" alt="" width="34" height="34">PLAYA</a>
-      <nav aria-label="Secciones">
-        <a href="#token">Token</a>
-        <a href="#acerca">Acerca de</a>
-        <a href="#verificar">Verificar</a>
-        <a href="#equipo">Equipo</a>
-        <a href="#contacto">Contacto</a>
+      <a class="brand" href="#top-of-page"><img src="playa-logo.svg" alt="" width="34" height="34">PLAYA</a>
+      <nav aria-label="Sections" data-i18n-aria="nav_label">
+        <a href="#token" data-i18n="n_token">Token</a>
+        <a href="#about" data-i18n="n_about">About</a>
+        <a href="#roadmap" data-i18n="n_roadmap">Roadmap</a>
+        <a href="#verify" data-i18n="n_verify">Verify</a>
+        <a href="#team" data-i18n="n_team">Team</a>
+        <a href="#faq" data-i18n="n_faq">FAQ</a>
+        <a href="#contact" data-i18n="n_contact">Contact</a>
       </nav>
-      <span class="net-badge">Base</span>
+      <div class="right">
+        <span class="net-badge">Base</span>
+        <div class="lang" role="group" aria-label="Language">
+          <button type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" data-lang="es" aria-pressed="false">ES</button>
+        </div>
+      </div>
     </div>
   </header>
 
-  <section class="hero" id="inicio">
-    <img class="coin" src="playa-logo.svg" alt="Logo de PLAYA: una moneda dorada con una letra P y una ola" width="340" height="340">
+  <section class="hero" id="top-of-page">
+    <img class="coin" src="playa-logo.svg" alt="PLAYA logo: a golden coin with the letter P and a wave" width="340" height="340">
     <div class="wrap hero-copy">
       <h1>PLAYA</h1>
-      <p class="tag">Un token comunitario inspirado en la playa, la brisa, el mar y las vacaciones</p>
-      <p class="chain">Token ERC-20 en Base (mainnet)</p>
+      <p class="tag" data-i18n="tag">A community token inspired by the beach, the sea breeze and vacations</p>
+      <p class="chain" data-i18n="chain">ERC-20 token on Base (mainnet)</p>
       <div class="actions">
         <a class="btn primary" target="_blank" rel="noopener"
-           href="https://basescan.org/token/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281">Ver en BaseScan</a>
-        <a class="btn" href="https://docs.base.org/" target="_blank" rel="noopener">Conocer Base</a>
-        <button class="btn" id="add-token" type="button">Añadir PLAYA a MetaMask</button>
+           href="https://basescan.org/token/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281" data-i18n="btn_scan">View on BaseScan</a>
+        <a class="btn" target="_blank" rel="noopener"
+           href="https://app.uniswap.org/swap?chain=base&amp;outputCurrency=0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281" data-i18n="btn_swap">Trade on Uniswap</a>
+        <button class="btn" id="add-token" type="button" data-i18n="btn_add">Add PLAYA to MetaMask</button>
       </div>
       <div id="status" role="status" aria-live="polite"></div>
     </div>
@@ -177,93 +206,104 @@
 
   <main>
     <div class="wrap">
-      <ul class="spec" id="token" aria-label="Datos del token">
-        <li><span class="v">PLAYA</span><span class="k">Nombre del token</span><span class="d">Símbolo PLAYA, estándar ERC-20</span></li>
-        <li><span class="v">1.000 millones</span><span class="k">Suministro total</span><span class="d">1.000.000.000 PLAYA, 18 decimales</span></li>
-        <li><span class="v">Base</span><span class="k">Red del contrato</span><span class="d">Mainnet, Chain ID 8453</span></li>
+      <ul class="spec" id="token" aria-label="Token facts">
+        <li><span class="v">PLAYA</span><span class="k" data-i18n="s1k">Token name</span><span class="d" data-i18n="s1d">Symbol PLAYA, ERC-20 standard</span></li>
+        <li><span class="v" data-i18n="s2v">1 billion</span><span class="k" data-i18n="s2k">Total supply</span><span class="d" data-i18n="s2d">1,000,000,000 PLAYA, 18 decimals</span></li>
+        <li><span class="v">Base</span><span class="k" data-i18n="s3k">Contract network</span><span class="d" data-i18n="s3d">Mainnet, Chain ID 8453</span></li>
       </ul>
 
-      <section class="sec" id="acerca" aria-labelledby="h-acerca">
-        <h2 id="h-acerca">Acerca de PLAYA</h2>
+      <section class="sec" id="about" aria-labelledby="h-about">
+        <h2 id="h-about" data-i18n="h_about">About PLAYA</h2>
         <div class="sec-body">
-          <p>
-            PLAYA es un token comunitario inspirado en el turismo, el mar y las
-            vacaciones. Es un contrato ERC-20 estándar, basado en OpenZeppelin, con
-            suministro fijo: no existe ninguna función para crear más tokens
-            después del despliegue.
-          </p>
-          <p>
-            Es un proyecto experimental. Por ahora PLAYA no ofrece una utilidad
-            concreta ni una promesa de uso futuro: su propósito es explorar cómo un
-            token comunitario puede representar una identidad compartida alrededor
-            del mar y los viajes.
-          </p>
-          <p class="en">
-            PLAYA is a community ERC-20 token on Base inspired by tourism, the sea and
-            beach vacations. It has a fixed supply of 1,000,000,000 tokens and no mint
-            function. It is an experimental project and does not promise returns or utility.
-          </p>
+          <p data-i18n="about1">PLAYA is a community token inspired by tourism, the sea and vacations. It is a standard ERC-20 contract built on OpenZeppelin with a fixed supply: there is no function to create more tokens after deployment, and the contract has no owner or admin functions.</p>
+          <p data-i18n="about2">PLAYA is an experimental project. For now it does not offer a specific utility or any promise of future use. Its purpose is to explore how a community token can represent a shared identity around the sea and travel.</p>
+          <p><strong data-i18n="is_h">What PLAYA is, and is not</strong></p>
+          <ul class="list">
+            <li data-i18n="is1">It is a fixed-supply ERC-20 token on Base, with open and verified source code.</li>
+            <li data-i18n="is2">It is a community and cultural experiment around beach, travel and vacation themes.</li>
+            <li data-i18n="is3">It is not an investment product, a security, or a promise of profit.</li>
+            <li data-i18n="is4">It has no guaranteed value, utility or price.</li>
+          </ul>
         </div>
       </section>
 
-      <section class="sec" id="verificar" aria-labelledby="h-verificar">
-        <h2 id="h-verificar">Datos verificables</h2>
+      <section class="sec" id="roadmap" aria-labelledby="h-roadmap">
+        <h2 id="h-roadmap" data-i18n="h_roadmap">Roadmap</h2>
+        <div class="sec-body">
+          <ul class="roadmap">
+            <li><span class="st" data-i18n="r_done">Done</span><span data-i18n="r1">Contract deployed on Base mainnet and source code verified on BaseScan.</span></li>
+            <li><span class="st" data-i18n="r_done">Done</span><span data-i18n="r2">Uniswap v2 liquidity pool created (PLAYA / ETH).</span></li>
+            <li><span class="st" data-i18n="r_done">Done</span><span data-i18n="r3">Official website and project email on playatoken.com.</span></li>
+            <li><span class="st" data-i18n="r_now">In progress</span><span data-i18n="r4">Publishing token information (logo, description, team) on block explorers.</span></li>
+            <li><span class="st" data-i18n="r_next">Goal</span><span data-i18n="r5">Open official community channels and publish their links here.</span></li>
+            <li><span class="st" data-i18n="r_next">Goal</span><span data-i18n="r6">Increase liquidity depth and evaluate locking it, announcing any change publicly.</span></li>
+            <li><span class="st" data-i18n="r_next">Goal</span><span data-i18n="r7">Explore, together with the community, tourism-themed ideas for PLAYA.</span></li>
+          </ul>
+          <p class="muted" data-i18n="r_note">Goals are intentions, not commitments or guarantees.</p>
+        </div>
+      </section>
+
+      <section class="sec" id="verify" aria-labelledby="h-verify">
+        <h2 id="h-verify" data-i18n="h_verify">Verifiable data</h2>
         <div class="sec-body">
           <dl class="facts">
-            <dt>Contrato</dt>
+            <dt data-i18n="f_contract">Contract</dt>
             <dd>
               <span class="addr" id="addr">0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281</span>
-              <button class="copy" id="copy-addr" type="button">Copiar</button><br>
-              <a href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281#code" target="_blank" rel="noopener">Ver el código verificado en BaseScan</a>
+              <button class="copy" id="copy-addr" type="button" data-i18n="copy">Copy</button><br>
+              <a href="https://basescan.org/address/0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281#code" target="_blank" rel="noopener" data-i18n="f_code">View verified code on BaseScan</a>
             </dd>
-            <dt>Red</dt>
+            <dt data-i18n="f_net">Network</dt>
             <dd>Base mainnet (Chain ID 8453)</dd>
-            <dt>Suministro</dt>
-            <dd>1.000.000.000 PLAYA, creados al desplegar el contrato en la wallet del creador</dd>
-            <dt>Liquidez</dt>
-            <dd>Una parte se aportó a un pool de Uniswap v2 en Base (comisión 0,3 %).
-              <a href="https://basescan.org/address/0x2C71490359c1dBffb41cb17B51Ad912d490F83B0" target="_blank" rel="noopener">Ver el pool en BaseScan</a></dd>
-            <dt>Licencia</dt>
+            <dt data-i18n="f_sup">Supply</dt>
+            <dd data-i18n="f_sup_v">1,000,000,000 PLAYA, minted once when the contract was deployed, to the creator's wallet</dd>
+            <dt data-i18n="f_ctl">Contract controls</dt>
+            <dd data-i18n="f_ctl_v">None: no owner, no mint function, no pause or blacklist</dd>
+            <dt data-i18n="f_liq">Liquidity</dt>
+            <dd><span data-i18n="f_liq_v">A portion was added to a Uniswap v2 pool on Base (0.3% fee).</span>
+              <a href="https://basescan.org/address/0x2C71490359c1dBffb41cb17B51Ad912d490F83B0" target="_blank" rel="noopener" data-i18n="f_pool">View the pool on BaseScan</a></dd>
+            <dt data-i18n="f_lic">License</dt>
             <dd>MIT</dd>
           </dl>
-          <p class="notice">
-            La liquidez del pool es muy pequeña y no está bloqueada, por lo que el
-            precio puede variar mucho con cualquier operación. Verifica siempre la
-            dirección del contrato antes de interactuar con cualquier token.
-          </p>
+          <p class="notice" data-i18n="liq_notice">Pool liquidity is very small and is not locked, so the price can move a lot with any trade. Always verify the contract address before interacting with any token.</p>
         </div>
       </section>
 
-      <section class="sec" id="equipo" aria-labelledby="h-equipo">
-        <h2 id="h-equipo">Equipo</h2>
+      <section class="sec" id="team" aria-labelledby="h-team">
+        <h2 id="h-team" data-i18n="h_team">Team</h2>
         <div class="sec-body">
-          <!-- REEMPLAZAR antes de publicar: nombre y enlace a un perfil profesional (LinkedIn o equivalente). -->
+          <!-- EDIT BEFORE PUBLISHING: replace the name and the profile URL (LinkedIn or equivalent). -->
           <p>
-            <strong>Yeison Jose Rincon Berrio</strong>, creador y responsable del proyecto.
-            <a href="https://www.linkedin.com/in/yjrincon" target="_blank" rel="noopener">Perfil profesional</a>
+            <strong>REPLACE: YOUR FULL NAME</strong>, <span data-i18n="team_role">creator and project lead.</span>
+            <a href="REPLACE-WITH-YOUR-PROFESSIONAL-PROFILE-URL" target="_blank" rel="noopener" data-i18n="team_link">Professional profile</a>
           </p>
         </div>
       </section>
 
-      <section class="sec" id="contacto" aria-labelledby="h-contacto">
-        <h2 id="h-contacto">Contacto</h2>
+      <section class="sec" id="faq" aria-labelledby="h-faq">
+        <h2 id="h-faq" data-i18n="h_faq">FAQ</h2>
         <div class="sec-body">
-          <p>Correo oficial del proyecto: <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a></p>
-          <p>
-            Este es el único canal oficial. Si alguien te escribe en nombre de PLAYA
-            pidiéndote dinero, tu frase semilla o tu clave privada, es una estafa.
-          </p>
+          <details><summary data-i18n="q1">Can more PLAYA be created?</summary><p data-i18n="a1">No. The contract mints the full 1,000,000,000 supply once, at deployment, and has no function to mint more. You can check this in the verified code on BaseScan.</p></details>
+          <details><summary data-i18n="q2">Who controls the contract?</summary><p data-i18n="a2">Nobody. It is a standard ERC-20 with no owner or admin functions, so no one can pause transfers, blacklist wallets or change the rules.</p></details>
+          <details><summary data-i18n="q3">How do I add PLAYA to my wallet?</summary><p data-i18n="a3">Use the “Add PLAYA to MetaMask” button, or add it manually: choose the Base network, go to Tokens, Import tokens and paste the contract address shown on this page.</p></details>
+          <details><summary data-i18n="q4">Where can I trade PLAYA?</summary><p data-i18n="a4">Currently only through the Uniswap v2 pool on Base. Liquidity is very small, so trades can move the price a lot. Always check the contract address first.</p></details>
+          <details><summary data-i18n="q5">Is PLAYA an investment?</summary><p data-i18n="a5">No. It is an experimental community token with no promised value or utility. Only use money you can afford to lose.</p></details>
+          <details><summary data-i18n="q6">Which are the official channels?</summary><p data-i18n="a6">This website and contacto@playatoken.com. The team will never ask you for your seed phrase or private keys, or for money by message.</p></details>
         </div>
       </section>
 
-      <section class="sec" aria-labelledby="h-aviso">
-        <h2 id="h-aviso">Aviso importante</h2>
+      <section class="sec" id="contact" aria-labelledby="h-contact">
+        <h2 id="h-contact" data-i18n="h_contact">Contact</h2>
         <div class="sec-body">
-          <p class="notice">
-            Esta página es informativa y no es una oferta de inversión ni una promesa
-            de rentabilidad. PLAYA no garantiza ningún valor de mercado ni utilidad
-            futura, y puedes perder el dinero que destines a ella.
-          </p>
+          <p><span data-i18n="c1">Official project email:</span> <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a></p>
+          <p data-i18n="c2">If someone writes to you in PLAYA's name asking for money, your seed phrase or your private key, it is a scam.</p>
+        </div>
+      </section>
+
+      <section class="sec" aria-labelledby="h-notice">
+        <h2 id="h-notice" data-i18n="h_notice">Important notice</h2>
+        <div class="sec-body">
+          <p class="notice" data-i18n="notice">This page is for information only and is not an investment offer or a promise of returns. PLAYA does not guarantee any market value or future utility, and you may lose the money you put into it.</p>
         </div>
       </section>
     </div>
@@ -271,13 +311,218 @@
 
   <footer>
     <div class="wrap">
-      <span>PLAYA Token, Base mainnet. Proyecto comunitario.</span>
+      <span data-i18n="foot">PLAYA Token, Base mainnet. Community project.</span>
       <a href="mailto:contacto@playatoken.com">contacto@playatoken.com</a>
     </div>
   </footer>
 
   <script>
-    /* ---------- Olas de la portada ---------- */
+    /* ---------- Language (English is the default) ---------- */
+    var I18N = {
+ "en": {
+  "title": "PLAYA Token | Base",
+  "desc": "PLAYA: an ERC-20 token on Base inspired by tourism, the beach, the sea breeze and vacations. Fixed supply of 1 billion.",
+  "nav_label": "Sections",
+  "n_token": "Token",
+  "n_about": "About",
+  "n_roadmap": "Roadmap",
+  "n_verify": "Verify",
+  "n_team": "Team",
+  "n_faq": "FAQ",
+  "n_contact": "Contact",
+  "tag": "A community token inspired by the beach, the sea breeze and vacations",
+  "chain": "ERC-20 token on Base (mainnet)",
+  "btn_scan": "View on BaseScan",
+  "btn_swap": "Trade on Uniswap",
+  "btn_add": "Add PLAYA to MetaMask",
+  "s1k": "Token name",
+  "s1d": "Symbol PLAYA, ERC-20 standard",
+  "s2v": "1 billion",
+  "s2k": "Total supply",
+  "s2d": "1,000,000,000 PLAYA, 18 decimals",
+  "s3k": "Contract network",
+  "s3d": "Mainnet, Chain ID 8453",
+  "h_about": "About PLAYA",
+  "about1": "PLAYA is a community token inspired by tourism, the sea and vacations. It is a standard ERC-20 contract built on OpenZeppelin with a fixed supply: there is no function to create more tokens after deployment, and the contract has no owner or admin functions.",
+  "about2": "PLAYA is an experimental project. For now it does not offer a specific utility or any promise of future use. Its purpose is to explore how a community token can represent a shared identity around the sea and travel.",
+  "is_h": "What PLAYA is, and is not",
+  "is1": "It is a fixed-supply ERC-20 token on Base, with open and verified source code.",
+  "is2": "It is a community and cultural experiment around beach, travel and vacation themes.",
+  "is3": "It is not an investment product, a security, or a promise of profit.",
+  "is4": "It has no guaranteed value, utility or price.",
+  "h_roadmap": "Roadmap",
+  "r_done": "Done",
+  "r_now": "In progress",
+  "r_next": "Goal",
+  "r1": "Contract deployed on Base mainnet and source code verified on BaseScan.",
+  "r2": "Uniswap v2 liquidity pool created (PLAYA / ETH).",
+  "r3": "Official website and project email on playatoken.com.",
+  "r4": "Publishing token information (logo, description, team) on block explorers.",
+  "r5": "Open official community channels and publish their links here.",
+  "r6": "Increase liquidity depth and evaluate locking it, announcing any change publicly.",
+  "r7": "Explore, together with the community, tourism-themed ideas for PLAYA.",
+  "r_note": "Goals are intentions, not commitments or guarantees.",
+  "h_verify": "Verifiable data",
+  "f_contract": "Contract",
+  "copy": "Copy",
+  "copied": "Copied",
+  "copy_fail": "Could not copy",
+  "f_code": "View verified code on BaseScan",
+  "f_net": "Network",
+  "f_sup": "Supply",
+  "f_sup_v": "1,000,000,000 PLAYA, minted once when the contract was deployed, to the creator's wallet",
+  "f_ctl": "Contract controls",
+  "f_ctl_v": "None: no owner, no mint function, no pause or blacklist",
+  "f_liq": "Liquidity",
+  "f_liq_v": "A portion was added to a Uniswap v2 pool on Base (0.3% fee).",
+  "f_pool": "View the pool on BaseScan",
+  "f_lic": "License",
+  "liq_notice": "Pool liquidity is very small and is not locked, so the price can move a lot with any trade. Always verify the contract address before interacting with any token.",
+  "h_team": "Team",
+  "team_role": "creator and project lead.",
+  "team_link": "Professional profile",
+  "h_faq": "FAQ",
+  "q1": "Can more PLAYA be created?",
+  "a1": "No. The contract mints the full 1,000,000,000 supply once, at deployment, and has no function to mint more. You can check this in the verified code on BaseScan.",
+  "q2": "Who controls the contract?",
+  "a2": "Nobody. It is a standard ERC-20 with no owner or admin functions, so no one can pause transfers, blacklist wallets or change the rules.",
+  "q3": "How do I add PLAYA to my wallet?",
+  "a3": "Use the “Add PLAYA to MetaMask” button, or add it manually: choose the Base network, go to Tokens, Import tokens and paste the contract address shown on this page.",
+  "q4": "Where can I trade PLAYA?",
+  "a4": "Currently only through the Uniswap v2 pool on Base. Liquidity is very small, so trades can move the price a lot. Always check the contract address first.",
+  "q5": "Is PLAYA an investment?",
+  "a5": "No. It is an experimental community token with no promised value or utility. Only use money you can afford to lose.",
+  "q6": "Which are the official channels?",
+  "a6": "This website and contacto@playatoken.com. The team will never ask you for your seed phrase or private keys, or for money by message.",
+  "h_contact": "Contact",
+  "c1": "Official project email:",
+  "c2": "If someone writes to you in PLAYA's name asking for money, your seed phrase or your private key, it is a scam.",
+  "h_notice": "Important notice",
+  "notice": "This page is for information only and is not an investment offer or a promise of returns. PLAYA does not guarantee any market value or future utility, and you may lose the money you put into it.",
+  "foot": "PLAYA Token, Base mainnet. Community project.",
+  "m_nowallet": "No wallet was detected in this browser.",
+  "m_openapp": "Open this page in the MetaMask app",
+  "m_manual": "You can also add it manually: in MetaMask choose the Base network, go to Tokens, Import tokens and paste the contract address: ",
+  "m_ok": "Done: PLAYA is in your wallet (Base network). If you were not asked to confirm, you may have already added it.",
+  "m_no": "The token was not added.",
+  "m_fail": "The action could not be completed: ",
+  "m_cancel": "cancelled."
+ },
+ "es": {
+  "title": "PLAYA Token | Base",
+  "desc": "PLAYA: token ERC-20 en Base inspirado en el turismo, la playa, la brisa, el mar y las vacaciones. Suministro fijo de 1.000 millones.",
+  "nav_label": "Secciones",
+  "n_token": "Token",
+  "n_about": "Acerca de",
+  "n_roadmap": "Hoja de ruta",
+  "n_verify": "Verificar",
+  "n_team": "Equipo",
+  "n_faq": "Preguntas",
+  "n_contact": "Contacto",
+  "tag": "Un token comunitario inspirado en la playa, la brisa del mar y las vacaciones",
+  "chain": "Token ERC-20 en Base (mainnet)",
+  "btn_scan": "Ver en BaseScan",
+  "btn_swap": "Operar en Uniswap",
+  "btn_add": "Añadir PLAYA a MetaMask",
+  "s1k": "Nombre del token",
+  "s1d": "Símbolo PLAYA, estándar ERC-20",
+  "s2v": "1.000 millones",
+  "s2k": "Suministro total",
+  "s2d": "1.000.000.000 PLAYA, 18 decimales",
+  "s3k": "Red del contrato",
+  "s3d": "Mainnet, Chain ID 8453",
+  "h_about": "Acerca de PLAYA",
+  "about1": "PLAYA es un token comunitario inspirado en el turismo, el mar y las vacaciones. Es un contrato ERC-20 estándar, basado en OpenZeppelin, con suministro fijo: no existe ninguna función para crear más tokens después del despliegue, y el contrato no tiene dueño ni funciones de administración.",
+  "about2": "PLAYA es un proyecto experimental. Por ahora no ofrece una utilidad concreta ni una promesa de uso futuro. Su propósito es explorar cómo un token comunitario puede representar una identidad compartida alrededor del mar y los viajes.",
+  "is_h": "Qué es PLAYA y qué no es",
+  "is1": "Es un token ERC-20 de suministro fijo en Base, con código abierto y verificado.",
+  "is2": "Es un experimento comunitario y cultural sobre la playa, los viajes y las vacaciones.",
+  "is3": "No es un producto de inversión, ni un valor financiero, ni una promesa de ganancias.",
+  "is4": "No tiene valor, utilidad ni precio garantizados.",
+  "h_roadmap": "Hoja de ruta",
+  "r_done": "Hecho",
+  "r_now": "En curso",
+  "r_next": "Objetivo",
+  "r1": "Contrato desplegado en Base mainnet y código verificado en BaseScan.",
+  "r2": "Pool de liquidez creado en Uniswap v2 (PLAYA / ETH).",
+  "r3": "Sitio web oficial y correo del proyecto en playatoken.com.",
+  "r4": "Publicar la información del token (logo, descripción, equipo) en los exploradores de bloques.",
+  "r5": "Abrir canales oficiales de comunidad y publicar aquí sus enlaces.",
+  "r6": "Aumentar la profundidad de la liquidez y evaluar bloquearla, anunciando públicamente cualquier cambio.",
+  "r7": "Explorar, junto con la comunidad, ideas de turismo para PLAYA.",
+  "r_note": "Los objetivos son intenciones, no compromisos ni garantías.",
+  "h_verify": "Datos verificables",
+  "f_contract": "Contrato",
+  "copy": "Copiar",
+  "copied": "Copiado",
+  "copy_fail": "No se pudo copiar",
+  "f_code": "Ver el código verificado en BaseScan",
+  "f_net": "Red",
+  "f_sup": "Suministro",
+  "f_sup_v": "1.000.000.000 PLAYA, creados una sola vez al desplegar el contrato, en la wallet del creador",
+  "f_ctl": "Controles del contrato",
+  "f_ctl_v": "Ninguno: sin dueño, sin función de creación, sin pausa ni lista negra",
+  "f_liq": "Liquidez",
+  "f_liq_v": "Una parte se aportó a un pool de Uniswap v2 en Base (comisión 0,3 %).",
+  "f_pool": "Ver el pool en BaseScan",
+  "f_lic": "Licencia",
+  "liq_notice": "La liquidez del pool es muy pequeña y no está bloqueada, por lo que el precio puede variar mucho con cualquier operación. Verifica siempre la dirección del contrato antes de interactuar con cualquier token.",
+  "h_team": "Equipo",
+  "team_role": "creador y responsable del proyecto.",
+  "team_link": "Perfil profesional",
+  "h_faq": "Preguntas frecuentes",
+  "q1": "¿Se pueden crear más PLAYA?",
+  "a1": "No. El contrato crea los 1.000.000.000 una sola vez, al desplegarse, y no tiene ninguna función para crear más. Puedes comprobarlo en el código verificado en BaseScan.",
+  "q2": "¿Quién controla el contrato?",
+  "a2": "Nadie. Es un ERC-20 estándar sin dueño ni funciones de administración, así que nadie puede pausar transferencias, bloquear wallets ni cambiar las reglas.",
+  "q3": "¿Cómo añado PLAYA a mi wallet?",
+  "a3": "Usa el botón “Añadir PLAYA a MetaMask”, o añádelo a mano: elige la red Base, ve a Tokens, Importar tokens y pega la dirección del contrato que aparece en esta página.",
+  "q4": "¿Dónde se puede operar PLAYA?",
+  "a4": "Por ahora solo en el pool de Uniswap v2 en Base. La liquidez es muy pequeña, así que las operaciones pueden mover mucho el precio. Verifica siempre la dirección del contrato.",
+  "q5": "¿PLAYA es una inversión?",
+  "a5": "No. Es un token comunitario experimental, sin valor ni utilidad prometidos. Usa solo dinero que puedas permitirte perder.",
+  "q6": "¿Cuáles son los canales oficiales?",
+  "a6": "Este sitio web y contacto@playatoken.com. El equipo nunca te pedirá tu frase semilla, tus claves privadas ni dinero por mensaje.",
+  "h_contact": "Contacto",
+  "c1": "Correo oficial del proyecto:",
+  "c2": "Si alguien te escribe en nombre de PLAYA pidiéndote dinero, tu frase semilla o tu clave privada, es una estafa.",
+  "h_notice": "Aviso importante",
+  "notice": "Esta página es informativa y no es una oferta de inversión ni una promesa de rentabilidad. PLAYA no garantiza ningún valor de mercado ni utilidad futura, y puedes perder el dinero que destines a ella.",
+  "foot": "PLAYA Token, Base mainnet. Proyecto comunitario.",
+  "m_nowallet": "No se detectó una wallet en este navegador.",
+  "m_openapp": "Abrir esta página en la app de MetaMask",
+  "m_manual": "También puedes añadirlo a mano: en MetaMask elige la red Base, ve a Tokens, Importar tokens y pega la dirección del contrato: ",
+  "m_ok": "Listo: PLAYA está en tu wallet (red Base). Si no pediste confirmación, es posible que ya lo tuvieras añadido.",
+  "m_no": "No se añadió el token.",
+  "m_fail": "No se pudo completar la acción: ",
+  "m_cancel": "cancelada."
+ }
+};
+    var LANG = "en";
+    function t(k) { return (I18N[LANG] && I18N[LANG][k]) || I18N.en[k] || k; }
+    function setLang(l) {
+      if (!I18N[l]) l = "en";
+      LANG = l;
+      document.documentElement.lang = l;
+      document.title = t("title");
+      var md = document.querySelector('meta[name="description"]');
+      if (md) md.setAttribute("content", t("desc"));
+      Array.prototype.forEach.call(document.querySelectorAll("[data-i18n]"), function (el) { el.textContent = t(el.getAttribute("data-i18n")); });
+      Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-aria]"), function (el) { el.setAttribute("aria-label", t(el.getAttribute("data-i18n-aria"))); });
+      Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-lang") === l)); });
+      try { localStorage.setItem("playa-lang", l); } catch (e) {}
+    }
+    (function () {
+      var saved = null;
+      try { saved = localStorage.getItem("playa-lang"); } catch (e) {}
+      var q = /[?&]lang=(en|es)\b/.exec(location.search);
+      setLang(q ? q[1] : (saved === "es" ? "es" : "en"));
+      Array.prototype.forEach.call(document.querySelectorAll(".lang button"), function (b) {
+        b.addEventListener("click", function () { setLang(b.getAttribute("data-lang")); });
+      });
+    })();
+
+/* ---------- Olas de la portada ---------- */
     (function () {
       var cv = document.getElementById("sea");
       if (!cv || !cv.getContext) return;
@@ -366,7 +611,7 @@
       start();
     })();
 
-    /* ---------- Copiar dirección y añadir token ---------- */
+    /* ---------- Copy address and add token ---------- */
     (function () {
       var TOKEN = {
         address: "0x5DE0D7f2Ac00c6c8A90ADf66b1C3665911aa8281",
@@ -384,8 +629,8 @@
       if (copyBtn) {
         copyBtn.addEventListener("click", function () {
           function done(ok) {
-            copyBtn.textContent = ok ? "Copiado" : "No se pudo copiar";
-            setTimeout(function () { copyBtn.textContent = "Copiar"; }, 2000);
+            copyBtn.textContent = ok ? t("copied") : t("copy_fail");
+            setTimeout(function () { copyBtn.textContent = t("copy"); }, 2000);
           }
           if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(TOKEN.address).then(function () { done(true); }, function () { done(false); });
@@ -394,21 +639,20 @@
       }
 
       function noWallet() {
-        // Sin wallet inyectada (p. ej. Chrome en el móvil): ofrecer abrir en la app o importar a mano.
+        // No injected wallet (e.g. Chrome on a phone): offer to open the app or import by hand.
         var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
         statusEl.textContent = "";
         var p1 = document.createElement("p");
-        p1.textContent = "No se detectó una wallet en este navegador.";
+        p1.textContent = t("m_nowallet");
         statusEl.appendChild(p1);
         if (isMobile) {
           var a = document.createElement("a");
           a.href = "https://metamask.app.link/dapp/" + location.host + location.pathname;
-          a.textContent = "Abrir esta página en la app de MetaMask";
+          a.textContent = t("m_openapp");
           statusEl.appendChild(a);
         }
         var p2 = document.createElement("p");
-        p2.textContent = "También puedes añadirlo a mano: en MetaMask elige la red Base, ve a Tokens, " +
-          "Importar tokens y pega la dirección del contrato: " + TOKEN.address;
+        p2.textContent = t("m_manual") + TOKEN.address;
         statusEl.appendChild(p2);
       }
 
@@ -443,9 +687,9 @@
             method: "wallet_watchAsset",
             params: { type: "ERC20", options: TOKEN }
           });
-          say(ok ? "Listo: PLAYA está en tu wallet (red Base). Si no pediste confirmación, es posible que ya lo tuvieras añadido." : "No se añadió el token.");
+          say(ok ? t("m_ok") : t("m_no"));
         } catch (e) {
-          say("No se pudo completar la acción: " + (e && e.message ? e.message : "cancelada."));
+          say(t("m_fail") + (e && e.message ? e.message : t("m_cancel")));
         }
       });
     })();
